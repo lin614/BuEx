@@ -35,7 +35,7 @@ export default {
     props: {
         shrink: {
             type: Boolean,
-            default: false
+            default: true
         },
         menuList: {
             type: Array,
