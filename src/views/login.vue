@@ -62,7 +62,7 @@ export default {
                 if (valid) {
                     Cookies.set('user', this.form.userName);
                     Cookies.set('password', this.form.password);
-                    this.$store.commit('setAvator', '../images/login-bg.jpg');
+                    this.$store.commit('setAvator', 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3245246320,3520849533&fm=27&gp=0.jpg');
                     if (this.form.userName === 'test') {
                         Cookies.set('access', 0);
                     } else {

@@ -56,7 +56,7 @@ export const otherRouter = {
     redirect: '/home',
     component: Main,
     children: [
-        { path: 'home', title: {i18n: 'home'}, name: 'home_index', component: () => import('@/views/home/home.vue') },
+        { path: 'home', title: {i18n: 'home'}, name: 'home_index', component: () => import('@/views/mine/mine.vue') },
         // { path: 'home', title: {i18n: 'home'}, name: 'home_index', component: () => import('@/views/home/home.vue') },
         // { path: 'ownspace', title: '个人中心', name: 'ownspace_index', component: () => import('@/views/own-space/own-space.vue') },
         // { path: 'order/:order_id', title: '订单详情', name: 'order-info', component: () => import('@/views/advanced-router/component/order-info.vue') }, // 用于展示动态路由
@@ -67,16 +67,26 @@ export const otherRouter = {
 
 // 作为Main组件的子页面展示并且在左侧菜单显示的路由写在appRouter里
 export const appRouter = [
+    // {
+    //     path: '/mine',
+    //     icon: 'key',
+    //     name: 'mine',
+    //     title: '我的资产',
+    //     component: Main,
+    //     children: [
+    //         { path: 'index', title: '我的资产', name: 'super_index', component: () => import('@/views/mine/mine.vue') }
+    //     ]
+    // },
     {
-        path: '/super',
+        path: '/market',
         icon: 'key',
-        name: 'super',
-        title: '超级管理',
+        name: 'market',
+        title: '市场行情',
         component: Main,
         children: [
-            { path: 'index', title: '超级管理', name: 'super_index', component: () => import('@/views/super/super.vue') }
+            { path: 'index', title: '市场行情', name: 'market_index', component: () => import('@/views/market/market.vue') }
         ]
-    }
+    },
 ];
 
 // 所有上面定义的路由都要写在下面的routers里
