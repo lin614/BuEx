@@ -57,12 +57,6 @@ export const otherRouter = {
   redirect: '/home',
   component: Main,
   children: [
-    {
-      path: 'home',
-      title: { i18n: 'home' },
-      name: 'home_index',
-      component: () => import('@/views/mine/mine.vue')
-    },
     // { path: 'home', title: {i18n: 'home'}, name: 'home_index', component: () => import('@/views/home/home.vue') },
     {
       path: 'ownspace',
@@ -94,6 +88,19 @@ export const appRouter = [
   //         { path: 'index', title: '我的资产', name: 'super_index', component: () => import('@/views/mine/mine.vue') }
   //     ]
   // },
+  {
+    path: '/home',
+    icon: 'home',
+    component: Main,
+    children: [
+      {
+        path: 'index',
+        title: { i18n: 'home' },
+        name: 'home_index',
+        component: () => import('@/views/mine/mine.vue')
+      }
+    ]
+  },
   {
     path: '/market',
     icon: 'ios-pulse',
@@ -130,8 +137,6 @@ export const appRouter = [
   {
     path: '/tradeM',
     icon: 'cash',
-    name: 'trade',
-    title: '市场行情',
     component: Main,
     children: [
       {
