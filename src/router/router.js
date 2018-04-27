@@ -96,7 +96,7 @@ export const appRouter = [
   // },
   {
     path: '/market',
-    icon: 'key',
+    icon: 'ios-pulse',
     name: 'market',
     title: '币币交易',
     component: Main,
@@ -114,21 +114,32 @@ export const appRouter = [
         component: () => import('@/views/market/trade.vue')
       },
       {
-        path: 'test',
-        title: 'test',
-        name: 'market_test',
-        component: () => import('@/views/market/components/bs.vue')
+        path: 'history',
+        title: '成交记录',
+        name: 'market_positon',
+        component: () => import('@/views/market/history.vue')
       }
+      //   {
+      //     path: 'test',
+      //     title: 'test',
+      //     name: 'market_test',
+      //     component: () => import('@/views/market/components/bs.vue')
+      //   }
     ]
   },
   {
-    path: '/trade',
-    icon: 'key',
+    path: '/tradeM',
+    icon: 'cash',
     name: 'trade',
     title: '市场行情',
     component: Main,
     children: [
-      // { path: 'index', title: '法币交易', name: 'trade_index', component: () => import('@/views/market/1.vue') }
+      {
+        path: 'index',
+        title: '法币交易',
+        name: 'tradeM_index',
+        component: () => import('@/views/market/tradeM.vue')
+      }
     ]
   }
 ]

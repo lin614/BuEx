@@ -2,10 +2,15 @@
     <div class="content">
         <Tabs value="name1" :animated="false">
             <TabPane label="限价交易" name="name1">
-                <bs-dash></bs-dash>
+               <div class="ivu-card-body">
+                    <bs-dash></bs-dash>
+                </div>
             </TabPane>
             <TabPane label="市价交易" name="name2">
-                <bs-dash></bs-dash>
+                <div class="ivu-card-body">
+                    <bs-dash></bs-dash>
+                </div>
+                
             </TabPane>
         </Tabs>
     </div>

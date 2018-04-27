@@ -12,7 +12,15 @@
             </p>
             </Col>
         </Row>
-        <hr>
+        <Row>
+            <Col span="12">
+            <hr style="width:90%">
+            </Col>
+            <Col span="12">
+            <hr style="width:90%">
+            </Col>
+        </Row>
+
         <Row>
             <Col span="12">
             <p>买入价
@@ -47,6 +55,14 @@
         </Row>
         <Row>
             <Col span="12" :style="{padding:'10px'}">
+            <Button type="success" long :style="{width:'90%'}">买入</Button>
+            </Col>
+            <Col span="12" :style="{padding:'10px'}">
+            <Button type="error" long :style="{width:'90%'}">卖出</Button>
+            </Col>
+        </Row>
+        <!-- <Row>
+            <Col span="12" :style="{padding:'10px'}">
             <Row type="flex" justify="space-between" class="code-row-bg">
                 <Col span="8">0 BTC</Col>
                 <Col span="4">0.0000BTC</Col>
@@ -54,7 +70,7 @@
             </Col>
             <Col span="12" :style="{padding:'10px'}">
             </Col>
-        </Row>
+        </Row> -->
 
     </div>
 </template>
