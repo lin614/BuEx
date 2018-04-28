@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="bsd">
         <Row>
             <Col span="12">
             <p>可用 100 USDT
@@ -12,7 +12,7 @@
             </p>
             </Col>
         </Row>
-        <Row>
+        <Row :style="{paddingBottom:'10px'}">
             <Col span="12">
             <hr style="width:90%">
             </Col>
@@ -21,28 +21,32 @@
             </Col>
         </Row>
 
-        <Row>
+        <Row :style="{paddingBottom:'10px'}">
             <Col span="12">
             <p>买入价
-                <Input v-model="buyPrice" placeholder="USDT" style="width: 90%"></Input>
+
             </p>
+            <Input v-model="buyPrice" placeholder="USDT" style="width: 90%"></Input>
             </Col>
             <Col span="12">
             <p>卖出价
-                <Input v-model="buyPrice" placeholder="USDT" style="width: 90%"></Input>
+
             </p>
+            <Input v-model="buyPrice" placeholder="USDT" style="width: 90%"></Input>
             </Col>
         </Row>
-        <Row>
+        <Row :style="{paddingBottom:'10px'}">
             <Col span="12">
             <p>买入量
-                <Input v-model="buyPrice" placeholder="BTC" style="width: 90%"></Input>
+
             </p>
+            <Input v-model="buyPrice" placeholder="BTC" style="width: 90%"></Input>
             </Col>
             <Col span="12">
             <p>卖出量
-                <Input v-model="buyPrice" placeholder="BTC" style="width: 90%"></Input>
+
             </p>
+            <Input v-model="buyPrice" placeholder="BTC" style="width: 90%"></Input>
             </Col>
         </Row>
         <Row>
@@ -87,5 +91,7 @@ export default {
 </script>
 
 <style>
-
+.bsd p {
+  padding-bottom: 5px;
+}
 </style>

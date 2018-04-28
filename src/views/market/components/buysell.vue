@@ -4,7 +4,7 @@
         <Tabs value="name1" :animated="false">
             <TabPane label="限价交易" name="name1">
                 <div class="ivu-card-body">
-                    <bs-dash></bs-dash>
+                   <bs-dash></bs-dash>
                 </div>
             </TabPane>
             <TabPane label="市价交易" name="name2">
@@ -19,10 +19,12 @@
 
 <script>
 import bsDash from './bsDash'
+// import bs from './bs'
 export default {
   name: 'buysell',
   components: {
-    bsDash
+    bsDash,
+    // bs
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <Row height="90%">
+  <Row height="90%" :gutter="10">
     <Col span="16">
     <Card :style="{height:'470px'}" padding="0" dis-hover="true">
       <!-- <p slot="title">
