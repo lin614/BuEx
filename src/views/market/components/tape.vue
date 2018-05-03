@@ -1,8 +1,8 @@
 <template>
   <div>
     <div style="padding:7px 16px;" class="bottom-border">最新价 1.5389 USDT ≈ 9.84 CNY</div>
-    <Table disabled-hover highlight-row="false" :columns="columns1" :data="data1" class="tapeList" border="false"></Table>
-    <Table disabled-hover highlight-row="false" :columns="columns1" :data="data2" class="tapeList" :show-header="false" border="false"></Table>
+    <Table disabled-hover :highlight-row="false" :columns="columns1" :data="data1" class="tapeList" :border="false"></Table>
+    <Table disabled-hover :highlight-row="false" :columns="columns1" :data="data2" class="tapeList" :show-header="false" :border="false"></Table>
   </div>
 </template>
 <script>

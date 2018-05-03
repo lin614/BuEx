@@ -27,7 +27,7 @@
 
             </p>
             <InputNumber :max="10000" :step="0.1" v-model="buyPrice" :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')" :parser="value => value.replace(/$s?|(,*)/g, '')" :style="{width: '90%'}"></InputNumber>
-            <!-- <Input v-model="buyPrice" placeholder="USDT" style="width: 90%"></Input> -->
+
             </Col>
             <Col span="12">
             <p>卖出价
@@ -50,14 +50,14 @@
             <Input v-model="buyPrice" placeholder="BTC" style="width: 90%"></Input>
             </Col>
         </Row>
-        <Row>
-            <Col span="12" :style="{padding:'10px'}">
-            <Slider v-model="value6" :step="10" show-stops :style="{width:'90%'}"></Slider>
-            </Col>
-            <Col span="12" :style="{padding:'10px'}">
-            <Slider v-model="value6" :step="10" show-stops :style="{width:'90%'}"></Slider>
-            </Col>
-        </Row>
+        <!-- <!-- <Row> -->
+        <Col span="12" :style="{padding:'10px'}">
+        <Slider v-model="buyPrice" :step="10" show-stops :style="{width:'90%'}"></Slider>
+        </Col>
+        <Col span="12" :style="{padding:'10px'}">
+        <Slider v-model="buyPrice" :step="10" show-stops :style="{width:'90%'}"></Slider>
+        </Col>
+        </Row> -->
         <Row>
             <Col span="12" :style="{padding:'10px'}">
             <Button type="success" long :style="{width:'90%'}">买入</Button>
@@ -85,7 +85,7 @@ export default {
   name: 'bsDash',
   data() {
     return {
-      buyPrice: ''
+      buyPrice: 100
     }
   }
 }
