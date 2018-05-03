@@ -63,14 +63,14 @@ export const otherRouter = {
       title: '个人中心',
       name: 'ownspace_index',
       component: () => import('@/views/own-space/own-space.vue')
-    },
-    {
-      path: 'order/:order_id',
-      title: '订单详情',
-      name: 'order-info',
-      component: () =>
-        import('@/views/advanced-router/component/order-info.vue')
-    } // 用于展示动态路由
+    }
+    // {
+    //   path: 'order/:order_id',
+    //   title: '订单详情',
+    //   name: 'order-info',
+    //   component: () =>
+    //     import('@/views/advanced-router/component/order-info.vue')
+    // } // 用于展示动态路由
     // { path: 'shopping', title: '购物详情', name: 'shopping', component: () => import('@/views/advanced-router/component/shopping-info.vue') }, // 用于展示带参路由
     // { path: 'message', title: '消息中心', name: 'message_index', component: () => import('@/views/message/message.vue') }
   ]
@@ -91,6 +91,7 @@ export const appRouter = [
   {
     path: '/home',
     icon: 'home',
+    name: 'home',
     component: Main,
     children: [
       {
@@ -137,6 +138,7 @@ export const appRouter = [
   {
     path: '/tradeM',
     icon: 'cash',
+    name: '/tradeM',
     component: Main,
     children: [
       {

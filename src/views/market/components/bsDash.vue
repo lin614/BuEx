@@ -26,7 +26,8 @@
             <p>买入价
 
             </p>
-            <Input v-model="buyPrice" placeholder="USDT" style="width: 90%"></Input>
+            <InputNumber :max="10000" :step="0.1" v-model="buyPrice" :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')" :parser="value => value.replace(/$s?|(,*)/g, '')" :style="{width: '90%'}"></InputNumber>
+            <!-- <Input v-model="buyPrice" placeholder="USDT" style="width: 90%"></Input> -->
             </Col>
             <Col span="12">
             <p>卖出价

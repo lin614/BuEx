@@ -85,6 +85,8 @@ import mapDataTable from './components/mapDataTable.vue'
 import toDoListItem from './components/toDoListItem.vue'
 import beChart from './components/beChart.vue'
 import plChart from './components/plChart.vue'
+import Enumerable from 'linq'
+import util from '@/libs/util.js'
 
 export default {
   name: 'home',
@@ -103,24 +105,7 @@ export default {
     toDoListItem
   },
   data() {
-    return {
-      toDoList: [
-        {
-          title: '去iView官网学习完整的iView组件'
-        },
-        {
-          title: '去iView官网学习完整的iView组件'
-        },
-        {
-          title: '去iView官网学习完整的iView组件'
-        },
-        {
-          title: '去iView官网学习完整的iView组件'
-        },
-        {
-          title: '去iView官网学习完整的iView组件'
-        }
-      ],
+    return {      
       count: {
         createUser: 496,
         visit: 3264,
@@ -159,6 +144,14 @@ export default {
       this.showAddNewTodo = false
       this.newToDoItemValue = ''
     }
+  },
+  mounted() {
+    //获取基础数据
+    util.get('/common/currencys').then(res => {
+      if (res.status == '200' && res.data.meta.message === 'success') {
+        console.log(res.data)
+      }
+    })
   }
 }
 </script>
