@@ -1,5 +1,5 @@
 <template>
-  <Table :columns="col" :data="data"></Table>
+  <Table :columns="col" :data="data" :highlight-row="true" @on-row-click='selectPair'></Table>
 </template>
 <script>
 import Enumerable from 'linq'
@@ -9,6 +9,10 @@ export default {
   data() {
     return {
       col: [
+        // {
+        //   type: 'index',
+        //   width: '30'
+        // },
         {
           title: '名称',
           key: 'name'
@@ -48,6 +52,19 @@ export default {
       ],
       data: [],
       bd: this.$store.state.bd
+    }
+  },
+  methods: {
+    selectPair(val, i) {
+      console.log('click')
+      console.log(val)
+      this.$store.commit('setPair', {
+        bc: val.name.split('/')[0],
+        qc: val.name.split('/')[1]
+      })
+      this.$router.push({
+        name: 'market_trade'
+      })
     }
   },
   mounted() {

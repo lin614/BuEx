@@ -23,12 +23,7 @@ export default {
   components: {
     marketList
   },
-  mounted() {
-    // console.log(JSON.stringify(this.bd.pairs))
-    // console.log(this.bd.pairs.length)
-    // console.log(this.bd)
-    // this.bd.pairs.forEach(p => console.log(p.key()))
-  }
+  mounted() {}
 }
 </script>
 

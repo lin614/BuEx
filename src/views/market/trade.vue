@@ -25,7 +25,17 @@
 <script>
 import buysell from './components/buysell.vue'
 import tape from './components/tape'
+import Enumerable from 'linq'
 export default {
+  name: 'trade',
+  data() {
+    return {
+      bd: this.$store.state.bd,
+      user: this.$store.state.user
+    }
+  },
+  methods: {},
+  mounted() {},
   components: {
     buysell,
     tape

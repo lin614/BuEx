@@ -6,7 +6,7 @@ const user = {
     asserts: [
       { cur: 'USDT', amount: 1000.5, symbol: '$' },
       { cur: 'ETH', amount: 10.5, symbol: 'Eth' }
-    ]
+    ],
   },
   mutations: {
     login(state, uid) {
