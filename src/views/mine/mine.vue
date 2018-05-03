@@ -22,8 +22,8 @@
             <Col span="16" style="padding-left:6px;">
             <Row class-name="made-child-con-middle" type="flex" align="middle">
               <div>
-                <b class="card-user-infor-name">￥10000 CNY</b>
-                <p>$ 600 USD</p>
+                <b class="card-user-infor-name"> {{asserts[0].amount}} {{asserts[0].cur}}</b>
+                <p> {{asserts[1].amount}} {{asserts[1].cur}}</p>
               </div>
             </Row>
             </Col>
@@ -37,7 +37,7 @@
           </Row>
           <Row class="margin-top-8">
             <Col span="8">
-            <p class="notwrap">上次登录地点:</p>
+            <p class="notwrap">当前用户userid:{{userid}}</p>
             </Col>
             <Col span="16" class="padding-left-8">北京1</Col>
           </Row>
@@ -112,7 +112,9 @@ export default {
       },
       cityData: cityData,
       showAddNewTodo: false,
-      newToDoItemValue: ''
+      newToDoItemValue: '',
+      asserts: this.$store.state.user.asserts,
+      userid: this.$store.state.user.userid
     }
   },
   computed: {

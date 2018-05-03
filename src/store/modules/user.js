@@ -3,7 +3,10 @@ import Cookies from 'js-cookie'
 const user = {
   state: {
     userid: 0,
-    asserts: [{ cur: 'USDT', amount: 1000.5 }, { cur: 'ETH', amount: 10.5 }]
+    asserts: [
+      { cur: 'USDT', amount: 1000.5, symbol: '$' },
+      { cur: 'ETH', amount: 10.5, symbol: 'Eth' }
+    ]
   },
   mutations: {
     login(state, uid) {

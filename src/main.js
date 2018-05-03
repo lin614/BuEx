@@ -32,11 +32,20 @@ new Vue({
     // util.checkUpdate(this);
 
     //在此获取基础数据，为了提升进入程序后的体验提升
-    //获取基础数据
+    //获取支持的货币
     util.get('/common/currencys').then(res => {
       if (res.status == '200' && res.data.meta.message === 'success') {
-        console.log(res.data)
+        console.log('/common/currencys')
+        this.$store.commit('initCurs', res.data.data)
       }
+    })
+    //获取交易对
+    util.get('/common/pairs').then(res => {
+      console.log('/common/pairs')
+      let list = Enumerable.from(res.data.data)
+        .groupBy('$.quoteCurrency')
+        .toArray()
+      this.$store.commit('initPairs', list)
     })
   },
   created() {
