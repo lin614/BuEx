@@ -1,15 +1,9 @@
 <template>
     <Card :padding="0" :dis-hover="true">
         <!-- <p slot="title">市场行情</p> -->
-        <Tabs value="name1" :animated="false">
-            <TabPane label="USDT" name="name1">
-                <market-list code="USDT"></market-list>
-            </TabPane>
-            <TabPane label="BTC" name="name2">
-                <market-list code="BTC"></market-list>
-            </TabPane>
-            <TabPane label="ETH" name="name3">
-                <market-list code="ETH"></market-list>
+        <Tabs v-model="qc" :animated="false">
+            <TabPane v-for="p in bd.pairs" :key="p.key()" :label="p.key()" :name="p.key()">
+                <market-list :code="p.key()"></market-list>
             </TabPane>
         </Tabs>
     </Card>
@@ -20,8 +14,20 @@ import marketList from './components/marketList'
 
 export default {
   name: 'market',
+  data() {
+    return {
+      bd: this.$store.state.bd,
+      qc: 'USDT'
+    }
+  },
   components: {
     marketList
+  },
+  mounted() {
+    // console.log(JSON.stringify(this.bd.pairs))
+    // console.log(this.bd.pairs.length)
+    // console.log(this.bd)
+    // this.bd.pairs.forEach(p => console.log(p.key()))
   }
 }
 </script>

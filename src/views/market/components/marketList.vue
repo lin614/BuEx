@@ -1,13 +1,14 @@
 <template>
-    <Table :columns="columns1" :data="data1"></Table>
+  <Table :columns="col" :data="data"></Table>
 </template>
 <script>
+import Enumerable from 'linq'
 export default {
   name: 'marketList',
   props: ['code'],
   data() {
     return {
-      columns1: [
+      col: [
         {
           title: '名称',
           key: 'name'
@@ -45,89 +46,32 @@ export default {
           key: 'vol'
         }
       ],
-      data1: [
-        {
-          name: 'BTC/' + this.code,
-          price: 9427.66,
-          ud: '300',
-          udp: '5.5%',
-          open: '9100.55',
-          high: '10000',
-          low: '8000',
-          pre: '9000',
-          vol: '12345678'
-        },
-        {
-          name: 'ETH/' + this.code,
-          price: 9427.66,
-          ud: '300',
-          udp: '5.5%',
-          open: '9100.55',
-          high: '10000',
-          low: '8000',
-          pre: '9000',
-          vol: '12345678'
-        },
-        {
-          name: 'ECH/' + this.code,
-          price: 9427.66,
-          ud: '300',
-          udp: '5.5%',
-          open: '9100.55',
-          high: '10000',
-          low: '8000',
-          pre: '9000',
-          vol: '12345678'
-        },
-        {
-          name: 'ETC/' + this.code,
-          price: 9427.66,
-          ud: '300',
-          udp: '5.5%',
-          open: '9100.55',
-          high: '10000',
-          low: '8000',
-          pre: '9000',
-          vol: '12345678'
-        },
-        {
-          name: 'ADA/' + this.code,
-          price: 9427.66,
-          ud: '300',
-          udp: '5.5%',
-          open: '9100.55',
-          high: '10000',
-          low: '8000',
-          pre: '9000',
-          vol: '12345678'
-        },
-        {
-          name: 'LTC/' + this.code,
-          price: 9427.66,
-          ud: '300',
-          udp: '5.5%',
-          open: '9100.55',
-          high: '10000',
-          low: '8000',
-          pre: '9000',
-          vol: '12345678'
-        },
-        {
-          name: 'EOS/' + this.code,
-          price: 9427.66,
-          ud: '300',
-          udp: '5.5%',
-          open: '9100.55',
-          high: '10000',
-          low: '8000',
-          pre: '9000',
-          vol: '12345678'
-        }
-      ]
+      data: [],
+      bd: this.$store.state.bd
     }
   },
   mounted() {
-    console.log(this.code)
+    let group = Enumerable.from(this.bd.pairs).firstOrDefault(
+      p => p.key() === this.code
+    )
+    this.data = group
+      ? Enumerable.from(group.getSource())
+          .select((p, i) => {
+            return {
+              name: p.baseCurrency + '/' + this.code,
+              price: 9427.66,
+              ud: '300',
+              udp: '5.5%',
+              open: '9100.55',
+              high: '10000',
+              low: '8000',
+              pre: '9000',
+              vol: '12345678'
+            }
+          })
+          .toArray()
+      : []
+    console.log(group.key() + '--' + group.getSource().length)
   }
 }
 </script>

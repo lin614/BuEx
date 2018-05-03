@@ -8,7 +8,7 @@ export default {
       s.curs = list
     },
     initPairs(s, list) {
-      s.curs = list
+      s.pairs = list
     }
   }
 }

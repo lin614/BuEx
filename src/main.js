@@ -44,8 +44,10 @@ new Vue({
       console.log('/common/pairs')
       let list = Enumerable.from(res.data.data)
         .groupBy('$.quoteCurrency')
+        .log()
         .toArray()
       this.$store.commit('initPairs', list)
+      // console.log(list)
     })
   },
   created() {
