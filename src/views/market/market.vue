@@ -1,5 +1,5 @@
 <template>
-    <Card padding="0" dis-hover="true">
+    <Card :padding="0" :dis-hover="true">
         <!-- <p slot="title">市场行情</p> -->
         <Tabs value="name1" :animated="false">
             <TabPane label="USDT" name="name1">

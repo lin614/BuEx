@@ -1,9 +1,9 @@
 <template>
-    <Card padding="0" dis-hover="true">
-        <p slot="title">
-            <Icon type="ios-list-outline"></Icon>成交记录</p>
-        <Table :columns="columns1" :data="data1"></Table>
-    </Card>
+  <Card :padding="0" :dis-hover="true">
+    <p slot="title">
+      <Icon type="ios-list-outline"></Icon>成交记录</p>
+    <Table :columns="columns1" :data="data1"></Table>
+  </Card>
 </template>
 <script>
 export default {
