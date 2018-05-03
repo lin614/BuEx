@@ -7,7 +7,7 @@
 
     <Row :gutter="10" class="margin-top-10">
       <Col :md="24" :lg="8" :style="{marginBottom: '10px'}">
-      <Card dis-hover="true">
+      <Card :dis-hover="true">
         <p slot="title" class="card-title">
           <Icon type="android-map"></Icon>
           账户资金
@@ -45,7 +45,7 @@
       </Card>
       </Col>
       <Col :md="24" :lg="8" :style="{marginBottom: '10px'}">
-      <Card dis-hover="true">
+      <Card :dis-hover="true">
         <p slot="title" class="card-title">
           <Icon type="ios-pulse-strong"></Icon>
           持仓状况
@@ -56,7 +56,7 @@
       </Card>
       </Col>
       <Col :md="24" :lg="8">
-      <Card dis-hover="true">
+      <Card :dis-hover="true">
         <p slot="title" class="card-title">
           <Icon type="android-wifi"></Icon>
           涨幅行情
@@ -85,8 +85,6 @@ import mapDataTable from './components/mapDataTable.vue'
 import toDoListItem from './components/toDoListItem.vue'
 import beChart from './components/beChart.vue'
 import plChart from './components/plChart.vue'
-import Enumerable from 'linq'
-import util from '@/libs/util.js'
 
 export default {
   name: 'home',
@@ -105,7 +103,7 @@ export default {
     toDoListItem
   },
   data() {
-    return {      
+    return {
       count: {
         createUser: 496,
         visit: 3264,
@@ -145,13 +143,6 @@ export default {
       this.newToDoItemValue = ''
     }
   },
-  mounted() {
-    //获取基础数据
-    util.get('/common/currencys').then(res => {
-      if (res.status == '200' && res.data.meta.message === 'success') {
-        console.log(res.data)
-      }
-    })
-  }
+  mounted() {}
 }
 </script>
