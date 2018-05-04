@@ -8,10 +8,10 @@ util.title = function(title) {
   title = title || 'Bumo区块链'
   window.document.title = title
 }
-
+// const urls=['http://172.16.2.20:8080/api','http://172.16.2.20:8089/api']
 const ajaxUrl =
   env === 'development'
-    ? 'http://172.16.2.20:8080'
+    ? 'http://172.16.2.20:8080/api'
     : env === 'production'
       ? 'https://www.exchange.com'
       : 'https://debug.url.com'
@@ -20,8 +20,12 @@ util.ajax = axios.create({
   baseURL: ajaxUrl,
   timeout: 30000
 })
-util.get = function(parms) {
-  return this.ajax.get(ajaxUrl + parms)
+util.get = function(path, url = null) {
+  return this.ajax.get(url ? url : ajaxUrl + path)
+}
+util.post = function(path, parms, url = null) {
+  console.log(ajaxUrl + path)
+  return this.ajax.post(url ? url : ajaxUrl + path, parms)
 }
 
 util.inOf = function(arr, targetArr) {

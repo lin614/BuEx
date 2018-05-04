@@ -155,7 +155,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.code)
+    // console.log(this.code)
   }
 }
 </script>

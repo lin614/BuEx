@@ -26,14 +26,14 @@
             <p>买入价
 
             </p>
-            <InputNumber :max="10000" :step="0.1" v-model="buyPrice" :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')" :parser="value => value.replace(/$s?|(,*)/g, '')" :style="{width: '90%'}"></InputNumber>
+            <InputNumber :max="10000" :step="0.1" v-model="orderBuy.buyPrice" :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')" :parser="value => value.replace(/$s?|(,*)/g, '')" :style="{width: '90%'}"></InputNumber>
 
             </Col>
             <Col span="12">
             <p>卖出价
 
             </p>
-            <Input v-model="buyPrice" placeholder="USDT" style="width: 90%"></Input>
+            <InputNumber :max="10000" :step="0.1" v-model="orderSell.buyPrice" :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')" :parser="value => value.replace(/$s?|(,*)/g, '')" :style="{width: '90%'}"></InputNumber>
             </Col>
         </Row>
         <Row :style="{paddingBottom:'10px'}">
@@ -41,29 +41,29 @@
             <p>买入量
 
             </p>
-            <Input v-model="buyPrice" placeholder="BTC" style="width: 90%"></Input>
+            <Input v-model="orderBuy.amount" placeholder="" style="width: 90%"></Input>
             </Col>
             <Col span="12">
             <p>卖出量
 
             </p>
-            <Input v-model="buyPrice" placeholder="BTC" style="width: 90%"></Input>
+            <Input v-model="orderSell.amount" placeholder="BTC" style="width: 90%"></Input>
             </Col>
         </Row>
         <!-- <!-- <Row> -->
         <Col span="12" :style="{padding:'10px'}">
-        <Slider v-model="buyPrice" :step="10" show-stops :style="{width:'90%'}"></Slider>
+        <Slider v-model="orderBuy.amount" :step="10" show-stops :style="{width:'90%'}"></Slider>
         </Col>
         <Col span="12" :style="{padding:'10px'}">
-        <Slider v-model="buyPrice" :step="10" show-stops :style="{width:'90%'}"></Slider>
+        <Slider v-model="orderBuy.price" :step="10" show-stops :style="{width:'90%'}"></Slider>
         </Col>
         </Row> -->
         <Row>
             <Col span="12" :style="{padding:'10px'}">
-            <Button type="success" long :style="{width:'90%'}">买入</Button>
+            <Button type="success" long :style="{width:'90%'}" @click="subOrder(1)">买入</Button>
             </Col>
             <Col span="12" :style="{padding:'10px'}">
-            <Button type="error" long :style="{width:'90%'}">卖出</Button>
+            <Button type="error" long :style="{width:'90%'}" @click="subOrder(2)">卖出</Button>
             </Col>
         </Row>
         <!-- <Row>
@@ -83,9 +83,38 @@
 <script>
 export default {
   name: 'bsDash',
+  props: {
+    type: { type: Number, required: true }
+  },
   data() {
     return {
-      buyPrice: 100
+      bd: this.$store.state.bd,
+      user: this.$store.state.user,
+      orderBuy: {
+        price: 0,
+        amount: 0,
+        percent: 0
+      },
+      orderSell: {
+        price: 0,
+        amount: 0,
+        percent: 0
+      }
+    }
+  },
+  methods: {
+    subOrder(side) {
+      var info = side ? orderSell : orderBuy
+      let ord = {
+        userId: this.user.userId,
+        amount: info.amount,
+        price: info.price,
+        base: bd.pair.bc,
+        quote: bd.pair.qc,
+        type: this.type
+      }
+      console.log('ord:')
+      console.log(ord)
     }
   }
 }

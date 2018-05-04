@@ -56,8 +56,6 @@ export default {
   },
   methods: {
     selectPair(val, i) {
-      console.log('click')
-      console.log(val)
       this.$store.commit('setPair', {
         bc: val.name.split('/')[0],
         qc: val.name.split('/')[1]
@@ -88,7 +86,7 @@ export default {
           })
           .toArray()
       : []
-    console.log(group.key() + '--' + group.getSource().length)
+    // console.log(group.key() + '--' + group.getSource().length)
   }
 }
 </script>

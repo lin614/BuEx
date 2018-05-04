@@ -123,7 +123,7 @@ export const appRouter = [
       },
       {
         path: 'history',
-        title: '成交记录',
+        title: '委托记录',
         name: 'market_positon',
         component: () => import('@/views/market/history.vue')
       }

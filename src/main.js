@@ -22,6 +22,7 @@ new Vue({
     currentPageName: ''
   },
   mounted() {
+    console.log('main.js:开始')
     this.currentPageName = this.$route.name
     // 显示打开的页面的列表
     this.$store.commit('setOpenedList')
@@ -46,9 +47,13 @@ new Vue({
         .groupBy('$.quoteCurrency')
         .log()
         .toArray()
+
+      console.log('pair', list)
       this.$store.commit('initPairs', list)
+
       // console.log(list)
     })
+    console.log('main.js:结束')
   },
   created() {
     let tagsList = []

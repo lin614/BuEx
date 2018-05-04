@@ -4,12 +4,12 @@
         <Tabs value="name1" :animated="false">
             <TabPane label="限价交易" name="name1">
                 <div class="ivu-card-body">
-                    <bs-dash></bs-dash>
+                    <bs-dash :type="1"></bs-dash>
                 </div>
             </TabPane>
             <TabPane label="市价交易" name="name2">
                 <div class="ivu-card-body">
-                    <bs-dash></bs-dash>
+                    <bs-dash :type="1"></bs-dash>
                 </div>
 
             </TabPane>
@@ -31,7 +31,9 @@ export default {
     bsDash
     // bs
   },
-  mounted() {}
+  mounted() {
+    console.log(this.bd.pair)
+  }
 }
 </script>
 
