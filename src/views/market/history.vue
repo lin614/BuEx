@@ -141,12 +141,13 @@ export default {
       })
     },
     upOrders() {
+      // console.log('upOrders-userid:', this.user.userid)
       util
         .post('/order/list', { size: 1000, userId: this.user.userid })
         .then(res => {
           if (res.status == '200' && res.data.meta.code == '0')
-            console.log('history-uporders', res)
-          this.dataAll = res.data.data
+            // console.log('history-uporders', res)
+            this.dataAll = res.data.data
           this.dataCount = this.dataAll.length
           this.changepage(1)
         })
@@ -164,7 +165,7 @@ export default {
       // })
     },
     changepage(index) {
-      console.log(index)
+      // console.log(index)
       var _start = (index - 1) * this.pageSize
       var _end = index * this.pageSize
       this.data = this.dataAll.slice(_start, _end)
@@ -175,7 +176,7 @@ export default {
 
     this.upOrders()
     this.$nextTick(() => {
-      // setInterval(this.upOrders, 10000)
+      setInterval(this.upOrders, 1000)
     })
   }
 }

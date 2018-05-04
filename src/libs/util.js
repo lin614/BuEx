@@ -18,13 +18,14 @@ const ajaxUrl =
 
 util.ajax = axios.create({
   baseURL: ajaxUrl,
+  headers: { 'content-type': 'application/json' },
   timeout: 30000
 })
 util.get = function(path, url = null) {
   return this.ajax.get(url ? url : ajaxUrl + path)
 }
 util.post = function(path, parms, url = null) {
-  console.log(ajaxUrl + path)
+  // console.log(ajaxUrl + path)
   return this.ajax.post(url ? url : ajaxUrl + path, parms)
 }
 

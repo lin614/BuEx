@@ -2,7 +2,7 @@ import Cookies from 'js-cookie'
 
 const user = {
   state: {
-    userid: 3,
+    userid: 12,
     asserts: [
       { cur: 'USDT', amount: 1000.5, symbol: '$' },
       { cur: 'ETH', amount: 10.5, symbol: 'Eth' }

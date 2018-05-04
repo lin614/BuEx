@@ -26,14 +26,16 @@
             <p>买入价
 
             </p>
-            <InputNumber :max="10000" :step="0.1" v-model="orderBuy.buyPrice" :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')" :parser="value => value.replace(/$s?|(,*)/g, '')" :style="{width: '90%'}"></InputNumber>
+            <Input v-model="orderBuy.price" :number="true" placeholder="" style="width: 90%"></Input>
+            <!-- <InputNumber :max="10000" :step="0.1" v-model="orderBuy.buyPrice" :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')" :parser="value => value.replace(/$s?|(,*)/g, '')" :style="{width: '90%'}"></InputNumber> -->
 
             </Col>
             <Col span="12">
             <p>卖出价
 
             </p>
-            <InputNumber :max="10000" :step="0.1" v-model="orderSell.buyPrice" :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')" :parser="value => value.replace(/$s?|(,*)/g, '')" :style="{width: '90%'}"></InputNumber>
+            <Input v-model="orderSell.price" :number="true" placeholder="" style="width: 90%"></Input>
+            <!-- <InputNumber :max="10000" :step="0.1" v-model="orderSell.buyPrice" :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')" :parser="value => value.replace(/$s?|(,*)/g, '')" :style="{width: '90%'}"></InputNumber> -->
             </Col>
         </Row>
         <Row :style="{paddingBottom:'10px'}">
@@ -41,23 +43,22 @@
             <p>买入量
 
             </p>
-            <Input v-model="orderBuy.amount" placeholder="" style="width: 90%"></Input>
+            <Input v-model="orderBuy.amount" :number="true" placeholder="" style="width: 90%"></Input>
             </Col>
             <Col span="12">
             <p>卖出量
 
             </p>
-            <Input v-model="orderSell.amount" placeholder="BTC" style="width: 90%"></Input>
+            <Input v-model="orderSell.amount" :number="true" placeholder="BTC" style="width: 90%"></Input>
             </Col>
         </Row>
-        <!-- <!-- <Row> -->
         <Col span="12" :style="{padding:'10px'}">
-        <Slider v-model="orderBuy.amount" :step="10" show-stops :style="{width:'90%'}"></Slider>
+        <!-- <Slider v-model="orderBuy.amount" :step="10" show-stops :style="{width:'90%'}"></Slider> -->
         </Col>
         <Col span="12" :style="{padding:'10px'}">
-        <Slider v-model="orderBuy.price" :step="10" show-stops :style="{width:'90%'}"></Slider>
+        <!-- <Slider v-model="orderBuy.price" :step="1" show-stops :style="{width:'90%'}"></Slider> -->
         </Col>
-        </Row> -->
+        </Row>
         <Row>
             <Col span="12" :style="{padding:'10px'}">
             <Button type="success" long :style="{width:'90%'}" @click="subOrder(1)">买入</Button>
@@ -66,21 +67,14 @@
             <Button type="error" long :style="{width:'90%'}" @click="subOrder(2)">卖出</Button>
             </Col>
         </Row>
-        <!-- <Row>
-            <Col span="12" :style="{padding:'10px'}">
-            <Row type="flex" justify="space-between" class="code-row-bg">
-                <Col span="8">0 BTC</Col>
-                <Col span="4">0.0000BTC</Col>
-            </Row>
-            </Col>
-            <Col span="12" :style="{padding:'10px'}">
-            </Col>
-        </Row> -->
 
+        <hr/> {{msg}}
     </div>
 </template>
 
 <script>
+import util from '@/libs/util'
+import Enumerable from 'linq'
 export default {
   name: 'bsDash',
   props: {
@@ -99,22 +93,58 @@ export default {
         price: 0,
         amount: 0,
         percent: 0
-      }
+      },
+      msg: ''
     }
   },
   methods: {
     subOrder(side) {
-      var info = side ? orderSell : orderBuy
+      var info = side == 1 ? this.orderBuy : this.orderSell
       let ord = {
-        userId: this.user.userId,
-        amount: info.amount,
-        price: info.price,
-        base: bd.pair.bc,
-        quote: bd.pair.qc,
-        type: this.type
+        userId: this.user.userid.toString(),
+        amount: info.amount.toString(),
+        price: info.price.toString(),
+        base: this.bd.pair.bc,
+        quote: this.bd.pair.qc,
+        type: side === 1 ? 'buy-limit' : 'sell-limit'
       }
-      console.log('ord:')
-      console.log(ord)
+      console.log('ord:', ord)
+      let parms = Enumerable.from(ord)
+        .select(p => p.key + '=' + p.value)
+        .log()
+        .toJoinedString('&')
+      console.log(parms)
+      this.$Loading.start()
+      util
+        .post(
+          '/order/submit?' + parms
+          //'/order/submit?userId=12&amount=1&price=1&base=BTC&quote=ETH&type=buy-limit'
+        )
+        .then(res => {
+          console.log(res)
+          this.msg = JSON.stringify(res.data)
+          this.$Modal.info({
+            title: '提示',
+            content: `订单提交` + res.data.meta.message
+          })
+          this.$Loading.finish()
+          // console.log('history-uporders', res)
+          // if (res.status == '200' && res.data.meta.code == '0') {
+          //   //   console.log('history-uporders', res)
+          // }
+        })
+        .catch(err => {
+          console.error(err)
+          this.$Loading.error()
+        })
+      //   util
+      //     .post('/order/list', { size: 1000, userId: this.user.userid })
+      //     .then(res => {
+      //       if (res.status == '200' && res.data.meta.code == '0')
+      //         console.log('history-uporders', res)
+      //       this.dataAll = res.data.data
+      //       this.dataCount = this.dataAll.length
+      //     })
     }
   }
 }

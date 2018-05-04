@@ -2,7 +2,7 @@ export default {
   state: {
     curs: [], //所有货币类型
     pairs: [], //交易对
-    pair: { bc: 'BTC', qc: 'USDT' } //当前交易对
+    pair: { bc: 'BTC', qc: 'ETH' } //当前交易对
   },
   mutations: {
     initCurs(s, list) {

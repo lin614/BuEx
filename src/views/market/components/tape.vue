@@ -22,11 +22,11 @@ export default {
         {
           title: '数量',
           key: 'num'
-        },
-        {
-          title: '累计',
-          key: 'all'
         }
+        // {
+        //   title: '累计',
+        //   key: 'all'
+        // }
       ],
       data1: [
         {

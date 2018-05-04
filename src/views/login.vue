@@ -70,7 +70,10 @@ export default {
           } else {
             Cookies.set('access', 1)
           }
-          this.$store.commit('setUserid', this.form.userName === 'test' ? 3 : 4)
+          this.$store.commit(
+            'setUserid',
+            this.form.userName === 'test' ? 12 : 11
+          )
           this.$router.push({
             name: 'home_index'
           })
