@@ -1,18 +1,20 @@
 <template>
   <div>
     <div style="padding:7px 16px;" class="bottom-border">最新价 1.5389 USDT ≈ 9.84 CNY</div>
-    <Table disabled-hover :highlight-row="false" :columns="columns1" :data="data1" class="tapeList" :border="false"></Table>
-    <Table disabled-hover :highlight-row="false" :columns="columns1" :data="data2" class="tapeList" :show-header="false" :border="false"></Table>
+    <Table disabled-hover :highlight-row="false" :columns="col" :data="data1" class="tapeList" :border="false"></Table>
+    <hr style="color:#123456" />
+    <Table disabled-hover :highlight-row="false" :columns="col" :data="data2" class="tapeList" :show-header="false" :border="false"></Table>
   </div>
 </template>
 <script>
+import util from '@/libs/util'
 export default {
   name: 'tape',
   data() {
     return {
-      columns1: [
+      col: [
         {
-          title: '',
+          title: '盘口',
           key: 'ord'
         },
         {
@@ -21,141 +23,45 @@ export default {
         },
         {
           title: '数量',
-          key: 'num'
+          key: 'amount'
         }
         // {
         //   title: '累计',
         //   key: 'all'
         // }
       ],
-      data1: [
-        {
-          ord: '卖10',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        },
-        {
-          ord: '卖9',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        },
-        {
-          ord: '卖8',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        },
-        {
-          ord: '卖7',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        },
-        {
-          ord: '卖6',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        },
-        {
-          ord: '卖5',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        },
-        {
-          ord: '卖4',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        },
-        {
-          ord: '卖3',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        },
-        {
-          ord: '卖2',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        },
-        {
-          ord: '卖1',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        }
-      ],
-      data2: [
-        {
-          ord: '买1',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        },
-        {
-          ord: '买2',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        },
-        {
-          ord: '买3',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        },
-        {
-          ord: '买4',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        },
-        {
-          ord: '买5',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        },
-        {
-          ord: '买6',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        },
-        {
-          ord: '买7',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        },
-        {
-          ord: '买8',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        },
-        {
-          ord: '买9',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        },
-        {
-          ord: '买10',
-          price: '9427.66',
-          num: '300',
-          all: '24304'
-        }
-      ]
+      data1: [],
+      data2: []
+    }
+  },
+  methods: {
+    upTape() {
+      util
+        .get(
+          '/api/market/depth?base=BTC&quote=ETH&depth=1&size=20',
+          'http://172.16.2.20:8089'
+        )
+        .then(res => {
+          if (res.status == '200' && res.data.meta.message === 'success') {
+            // console.log(res.data.data)/*  */
+            res.data.data.asks.forEach((p, i, l) => {
+              p.ord = '卖' + (l.length - i)
+            })
+            res.data.data.bids.forEach((p, i, l) => {
+              p.ord = '买' + (i + 1)
+            })
+            this.data1 = res.data.data.asks
+            this.data2 = res.data.data.bids
+          }
+        })
     }
   },
   mounted() {
     // console.log(this.code)
+    this.upTape()
+    this.$nextTick(() => {
+      setInterval(this.upTape, 1000)
+    })
   }
 }
 </script>

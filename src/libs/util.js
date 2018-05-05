@@ -2,31 +2,40 @@ import axios from 'axios'
 import env from '../../build/env'
 import semver from 'semver'
 import packjson from '../../package.json'
+import Enumerable from 'linq'
 
 let util = {}
 util.title = function(title) {
   title = title || 'Bumo区块链'
   window.document.title = title
 }
-// const urls=['http://172.16.2.20:8080/api','http://172.16.2.20:8089/api']
-const ajaxUrl =
-  env === 'development'
-    ? 'http://172.16.2.20:8080/api'
-    : env === 'production'
-      ? 'https://www.exchange.com'
-      : 'https://debug.url.com'
+const ajaxUrl = 'http://172.16.2.20:8080/api'
+// const ajaxUrl =
+//   env === 'development'
+//     ? 'http://172.16.2.20:8080/api'
+//     : env === 'production'
+//       ? '172.16.2.20:8080/api'
+//       : '172.16.2.20:8080/api'
 
 util.ajax = axios.create({
   baseURL: ajaxUrl,
   headers: { 'content-type': 'application/json' },
   timeout: 30000
 })
-util.get = function(path, url = null) {
-  return this.ajax.get(url ? url : ajaxUrl + path)
+util.get = function(path, url) {
+  return this.ajax.get((url ? url : ajaxUrl) + path)
 }
-util.post = function(path, parms, url = null) {
+util.post = function(path, parms, url) {
   // console.log(ajaxUrl + path)
-  return this.ajax.post(url ? url : ajaxUrl + path, parms)
+  return this.ajax.post((url ? url : ajaxUrl) + path, parms)
+}
+
+//生成参数字符串
+util.parms = function(obj) {
+  return Enumerable.from(obj)
+    .select(p => p.key + '=' + p.value)
+    .log()
+    .toJoinedString('&')
 }
 
 util.inOf = function(arr, targetArr) {

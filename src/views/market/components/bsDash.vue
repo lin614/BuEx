@@ -1,75 +1,75 @@
 <template>
-    <div class="bsd">
-        <Row>
-            <Col span="12">
-            <p>可用 100 USDT
-                <span>充币</span>
-            </p>
-            </Col>
-            <Col span="12">
-            <p>可用 100 USDT
-                <span>充币</span>
-            </p>
-            </Col>
-        </Row>
-        <Row :style="{paddingBottom:'10px'}">
-            <Col span="12">
-            <hr style="width:90%">
-            </Col>
-            <Col span="12">
-            <hr style="width:90%">
-            </Col>
-        </Row>
+  <div class="bsd">
+    <Row>
+      <Col span="12">
+      <p>可用 100 USDT
+        <span>充币</span>
+      </p>
+      </Col>
+      <Col span="12">
+      <p>可用 100 USDT
+        <span>充币</span>
+      </p>
+      </Col>
+    </Row>
+    <Row :style="{paddingBottom:'10px'}">
+      <Col span="12">
+      <hr style="width:90%">
+      </Col>
+      <Col span="12">
+      <hr style="width:90%">
+      </Col>
+    </Row>
 
-        <Row :style="{paddingBottom:'10px'}">
-            <Col span="12">
-            <p>买入价
+    <Row :style="{paddingBottom:'10px'}">
+      <Col span="12">
+      <p>买入价
 
-            </p>
-            <Input v-model="orderBuy.price" :number="true" placeholder="" style="width: 90%"></Input>
-            <!-- <InputNumber :max="10000" :step="0.1" v-model="orderBuy.buyPrice" :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')" :parser="value => value.replace(/$s?|(,*)/g, '')" :style="{width: '90%'}"></InputNumber> -->
+      </p>
+      <Input v-model="orderBuy.price" :number="true" placeholder="" style="width: 90%"></Input>
+      <!-- <InputNumber :max="10000" :step="0.1" v-model="orderBuy.buyPrice" :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')" :parser="value => value.replace(/$s?|(,*)/g, '')" :style="{width: '90%'}"></InputNumber> -->
 
-            </Col>
-            <Col span="12">
-            <p>卖出价
+      </Col>
+      <Col span="12">
+      <p>卖出价
 
-            </p>
-            <Input v-model="orderSell.price" :number="true" placeholder="" style="width: 90%"></Input>
-            <!-- <InputNumber :max="10000" :step="0.1" v-model="orderSell.buyPrice" :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')" :parser="value => value.replace(/$s?|(,*)/g, '')" :style="{width: '90%'}"></InputNumber> -->
-            </Col>
-        </Row>
-        <Row :style="{paddingBottom:'10px'}">
-            <Col span="12">
-            <p>买入量
+      </p>
+      <Input v-model="orderSell.price" :number="true" placeholder="" style="width: 90%"></Input>
+      <!-- <InputNumber :max="10000" :step="0.1" v-model="orderSell.buyPrice" :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')" :parser="value => value.replace(/$s?|(,*)/g, '')" :style="{width: '90%'}"></InputNumber> -->
+      </Col>
+    </Row>
+    <Row :style="{paddingBottom:'10px'}">
+      <Col span="12">
+      <p>买入量
 
-            </p>
-            <Input v-model="orderBuy.amount" :number="true" placeholder="" style="width: 90%"></Input>
-            </Col>
-            <Col span="12">
-            <p>卖出量
+      </p>
+      <Input v-model="orderBuy.amount" :number="true" placeholder="" style="width: 90%"></Input>
+      </Col>
+      <Col span="12">
+      <p>卖出量
 
-            </p>
-            <Input v-model="orderSell.amount" :number="true" placeholder="BTC" style="width: 90%"></Input>
-            </Col>
-        </Row>
-        <Col span="12" :style="{padding:'10px'}">
-        <!-- <Slider v-model="orderBuy.amount" :step="10" show-stops :style="{width:'90%'}"></Slider> -->
-        </Col>
-        <Col span="12" :style="{padding:'10px'}">
-        <!-- <Slider v-model="orderBuy.price" :step="1" show-stops :style="{width:'90%'}"></Slider> -->
-        </Col>
-        </Row>
-        <Row>
-            <Col span="12" :style="{padding:'10px'}">
-            <Button type="success" long :style="{width:'90%'}" @click="subOrder(1)">买入</Button>
-            </Col>
-            <Col span="12" :style="{padding:'10px'}">
-            <Button type="error" long :style="{width:'90%'}" @click="subOrder(2)">卖出</Button>
-            </Col>
-        </Row>
+      </p>
+      <Input v-model="orderSell.amount" :number="true" placeholder="BTC" style="width: 90%"></Input>
+      </Col>
+    </Row>
+    <Col span="12" :style="{padding:'10px'}">
+    <!-- <Slider v-model="orderBuy.amount" :step="10" show-stops :style="{width:'90%'}"></Slider> -->
+    </Col>
+    <Col span="12" :style="{padding:'10px'}">
+    <!-- <Slider v-model="orderBuy.price" :step="1" show-stops :style="{width:'90%'}"></Slider> -->
+    </Col>
+    </Row>
+    <Row>
+      <Col span="12" :style="{padding:'10px'}">
+      <Button type="success" long :style="{width:'90%'}" @click="subOrder(1)">买入</Button>
+      </Col>
+      <Col span="12" :style="{padding:'10px'}">
+      <Button type="error" long :style="{width:'90%'}" @click="subOrder(2)">卖出</Button>
+      </Col>
+    </Row>
 
-        <hr/> {{msg}}
-    </div>
+    <hr/> {{msg}}
+  </div>
 </template>
 
 <script>
@@ -109,11 +109,7 @@ export default {
         type: side === 1 ? 'buy-limit' : 'sell-limit'
       }
       console.log('ord:', ord)
-      let parms = Enumerable.from(ord)
-        .select(p => p.key + '=' + p.value)
-        .log()
-        .toJoinedString('&')
-      console.log(parms)
+      var parms = util.parms(ord)
       this.$Loading.start()
       util
         .post(
