@@ -68,6 +68,20 @@
       </Card>
       </Col>
     </Row>
+    <Row :gutter="5">
+      <Col :xs="24" :sm="12" :md="6" :style="{marginBottom: '10px'}">
+      <infor-card id-name="user_created_count" :end-val="count.createUser" iconType="android-person-add" color="#2d8cf0" intro-text="今日新增用户"></infor-card>
+      </Col>
+      <Col :xs="24" :sm="12" :md="6" :style="{marginBottom: '10px'}">
+      <infor-card id-name="visit_count" :end-val="count.visit" iconType="ios-eye" color="#64d572" :iconSize="50" intro-text="今日浏览量"></infor-card>
+      </Col>
+      <Col :xs="24" :sm="12" :md="6" :style="{marginBottom: '10px'}">
+      <infor-card id-name="collection_count" :end-val="count.collection" iconType="upload" color="#ffd572" intro-text="今日数据采集量"></infor-card>
+      </Col>
+      <Col :xs="24" :sm="12" :md="6" :style="{marginBottom: '10px'}">
+      <infor-card id-name="transfer_count" :end-val="count.transfer" iconType="shuffle" color="#f25e43" intro-text="今日服务调用量"></infor-card>
+      </Col>
+    </Row>
   </div>
 </template>
 

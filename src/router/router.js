@@ -7,7 +7,8 @@ export const loginRouter = {
   meta: {
     title: 'Login - 登录'
   },
-  component: () => import('@/views/login.vue')
+  component: () =>
+    import ('@/views/login.vue')
 }
 
 export const page404 = {
@@ -16,7 +17,8 @@ export const page404 = {
   meta: {
     title: '404-页面不存在'
   },
-  component: () => import('@/views/error-page/404.vue')
+  component: () =>
+    import ('@/views/error-page/404.vue')
 }
 
 export const page403 = {
@@ -25,7 +27,8 @@ export const page403 = {
     title: '403-权限不足'
   },
   name: 'error-403',
-  component: () => import('@//views/error-page/403.vue')
+  component: () =>
+    import ('@//views/error-page/403.vue')
 }
 
 export const page500 = {
@@ -34,20 +37,22 @@ export const page500 = {
     title: '500-服务端错误'
   },
   name: 'error-500',
-  component: () => import('@/views/error-page/500.vue')
+  component: () =>
+    import ('@/views/error-page/500.vue')
 }
 
 export const preview = {
   path: '/preview',
   name: 'preview',
-  component: () => import('@/views/form/article-publish/preview.vue')
+  component: () =>
+    import ('@/views/form/article-publish/preview.vue')
 }
 
 export const locking = {
   path: '/locking',
   name: 'locking',
   component: () =>
-    import('@/views/main-components/lockscreen/components/locking-page.vue')
+    import ('@/views/main-components/lockscreen/components/locking-page.vue')
 }
 
 // 作为Main组件的子页面展示但是不在左侧菜单显示的路由写在otherRouter里
@@ -62,7 +67,8 @@ export const otherRouter = {
       path: 'ownspace',
       title: '个人中心',
       name: 'ownspace_index',
-      component: () => import('@/views/own-space/own-space.vue')
+      component: () =>
+        import ('@/views/own-space/own-space.vue')
     }
     // {
     //   path: 'order/:order_id',
@@ -93,14 +99,15 @@ export const appRouter = [
     icon: 'home',
     name: 'home',
     component: Main,
-    children: [
-      {
-        path: 'index',
-        title: { i18n: 'home' },
-        name: 'home_index',
-        component: () => import('@/views/mine/mine.vue')
-      }
-    ]
+    children: [{
+      path: 'index',
+      title: {
+        i18n: 'home'
+      },
+      name: 'home_index',
+      component: () =>
+        import ('@/views/mine/mine.vue')
+    }]
   },
   {
     path: '/market',
@@ -108,31 +115,27 @@ export const appRouter = [
     name: 'market',
     title: '币币交易',
     component: Main,
-    children: [
-      {
+    children: [{
         path: 'index',
         title: '市场行情',
         name: 'market_index',
-        component: () => import('@/views/market/market.vue')
+        component: () =>
+          import ('@/views/market/market.vue')
       },
       {
         path: 'trade',
         title: '下单交易',
         name: 'market_trade',
-        component: () => import('@/views/market/trade.vue')
+        component: () =>
+          import ('@/views/market/trade.vue')
       },
       {
         path: 'history',
         title: '委托记录',
         name: 'market_positon',
-        component: () => import('@/views/market/history.vue')
+        component: () =>
+          import ('@/views/market/history.vue')
       }
-      //   {
-      //     path: 'test',
-      //     title: 'test',
-      //     name: 'market_test',
-      //     component: () => import('@/views/market/components/bs.vue')
-      //   }
     ]
   },
   {
@@ -140,14 +143,26 @@ export const appRouter = [
     icon: 'cash',
     name: '/tradeM',
     component: Main,
-    children: [
-      {
-        path: 'index',
-        title: '法币交易',
-        name: 'tradeM_index',
-        component: () => import('@/views/market/tradeM.vue')
-      }
-    ]
+    children: [{
+      path: 'index',
+      title: '法币交易',
+      name: 'tradeM_index',
+      component: () =>
+        import ('@/views/market/tradeM.vue')
+    }]
+  },
+  {
+    path: '/test',
+    icon: 'cash',
+    name: '/test',
+    component: Main,
+    children: [{
+      path: 'index',
+      title: 'test',
+      name: 'test_index',
+      component: () =>
+        import ('@/views/test/test.vue')
+    }]
   }
 ]
 

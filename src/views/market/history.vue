@@ -1,8 +1,15 @@
 <template>
   <Card :padding="0" :dis-hover="true">
     <p slot="title">
-      <Icon type="ios-list-outline"></Icon>成交记录</p>
-    <Table :columns="col" :data="data"></Table>
+      <Icon type="ios-list-outline"></Icon>成交记录
+
+    </p>
+    <a href="#" slot="extra" @click.prevent="upOrders">
+      <Icon type="ios-loop-strong"></Icon>
+      更新
+    </a>
+
+    <Table :loading="loading" :columns="col" :data="data"></Table>
     <Page :total="dataCount" :page-size="pageSize" show-total @on-change="changepage"></Page>
   </Card>
 </template>
@@ -14,6 +21,7 @@ export default {
   props: ['code'],
   data() {
     return {
+      loading: false,
       user: this.$store.state.user,
       data: [],
       // 初始化信息总条数
@@ -142,6 +150,7 @@ export default {
     },
     upOrders() {
       // console.log('upOrders-userid:', this.user.userid)
+      this.loading = true
       util
         .post('/order/list', { size: 1000, userId: this.user.userid })
         .then(res => {
@@ -150,6 +159,7 @@ export default {
             this.dataAll = res.data.data
           this.dataCount = this.dataAll.length
           this.changepage(1)
+          this.loading = false
         })
       // axios
       //   .post('http://172.16.2.20:8080/api/order/list', {
@@ -176,7 +186,7 @@ export default {
 
     this.upOrders()
     this.$nextTick(() => {
-      setInterval(this.upOrders, 1000)
+      // setInterval(this.upOrders, 1000)
     })
   }
 }
